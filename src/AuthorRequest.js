@@ -4,6 +4,15 @@ class AuthorRequest extends React.Component{
     constructor(props){
         super(props)
         this.state={
+            formats:[
+                {                  
+                   itemCode: 'jcbk',
+                   FormatGroup: 'Book'
+                },                
+                {   itemCode : 'acbk',
+                    FormatGroup : 'Print'
+                }               
+             ],
             input: undefined,
             displayResponse: false,
             requestedBook: undefined
@@ -42,7 +51,7 @@ class AuthorRequest extends React.Component{
                                     <div className="feed-book-attr">{item.AuthorName}</div>
                                     <div className="feed-book-attr">{item.bibnum}</div>
                                     <div className="feed-book-attr">{item.count}</div>
-                                    <div className="feed-book-attr">{item.itemtype}</div>
+                                    <div className="feed-book-attr">{this.state.formats.find(el => el.itemCode === item.itemtype).FormatGroup}</div>
                                 </li>
                             )
                         })
