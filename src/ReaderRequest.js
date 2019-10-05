@@ -1,5 +1,4 @@
 import React from 'react';
-import { AvMicNone } from 'material-ui/svg-icons';
 
 class ReaderRequest extends React.Component{
     constructor(props){
@@ -25,7 +24,6 @@ class ReaderRequest extends React.Component{
                   requestedBook: res.book,
                   suggestions: res.suggestions,
                 });
-                // if res.requestedBook
             }
         )
     }

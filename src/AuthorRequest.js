@@ -43,7 +43,6 @@ class AuthorRequest extends React.Component{
             'dcilll',
             'pkbknh',
             'dcillb'],   
-            other :['abck'],
             input: undefined,
             displayResponse: false,
             requestedBook: undefined
@@ -67,8 +66,6 @@ class AuthorRequest extends React.Component{
     }
     renderBook(){
         if(this.state.displayResponse){
-
-
             return(
                 <ul className="feed-container">
                     <li className="feed-mail-item feed-mail-header">
@@ -82,8 +79,7 @@ class AuthorRequest extends React.Component{
                             var formatType="Print"
                             if(!this.state.print.includes(item.itemtype))
                             formatType="Other"
-                            return(
-                               
+                            return(                               
                                 <li className="feed-mail-item">
                                     <div className="feed-book-attr">{item.AuthorName}</div>
                                     <div className="feed-book-attr">{item.bibnum}</div>
