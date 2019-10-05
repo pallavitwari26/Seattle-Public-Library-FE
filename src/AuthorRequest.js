@@ -4,15 +4,46 @@ class AuthorRequest extends React.Component{
     constructor(props){
         super(props)
         this.state={
-            formats:[
-                {                  
-                   itemCode: 'jcbk',
-                   FormatGroup: 'Book'
-                },                
-                {   itemCode : 'acbk',
-                    FormatGroup : 'Print'
-                }               
-             ],
+            print:
+            ['acbk',
+            'acmap',
+            'acmus',
+            'acpam',
+            'acper',
+            'acunkn',
+            'ahbk',
+            'bcbk',
+            'bcper',
+            'dcord',
+            'drbk',
+            'drnp',
+            'drper',
+            'drtest',
+            'ucfold',
+            'ucunkn',
+            'xrbk',
+            'xrmus',
+            'xrpam',
+            'xrper',
+            'unk',
+            'arbk',
+            'armap',
+            'armus',
+            'arnp',
+            'arpam',
+            'arper',
+            'arunkn',
+            'drord',
+            'jcbk',
+            'jcmus',
+            'ucunknj',
+            'jrbk',
+            'jrmus',
+            'jrper',
+            'dcilll',
+            'pkbknh',
+            'dcillb'],   
+            other :['abck'],
             input: undefined,
             displayResponse: false,
             requestedBook: undefined
@@ -26,7 +57,7 @@ class AuthorRequest extends React.Component{
         fetch('http://127.0.0.1:5000/lms/api/compareCheckoutsByPublishedType?authorname='+input)
             .then(res => res.json())
             .then((res) => {
-                console.log(res)
+
                 this.setState({
                   displayResponse: true,
                   requestedBook: res.response
@@ -36,6 +67,8 @@ class AuthorRequest extends React.Component{
     }
     renderBook(){
         if(this.state.displayResponse){
+
+
             return(
                 <ul className="feed-container">
                     <li className="feed-mail-item feed-mail-header">
@@ -46,12 +79,16 @@ class AuthorRequest extends React.Component{
                     </li>
                     {
                         this.state.requestedBook.map((item) => {
+                            var formatType="Print"
+                            if(!this.state.print.includes(item.itemtype))
+                            formatType="Other"
                             return(
+                               
                                 <li className="feed-mail-item">
                                     <div className="feed-book-attr">{item.AuthorName}</div>
                                     <div className="feed-book-attr">{item.bibnum}</div>
                                     <div className="feed-book-attr">{item.count}</div>
-                                    <div className="feed-book-attr">{this.state.formats.find(el => el.itemCode === item.itemtype).FormatGroup}</div>
+                                    <div className="feed-book-attr">{formatType}</div>
                                 </li>
                             )
                         })

@@ -4,7 +4,8 @@ class LibraryRequest extends React.Component{
     constructor(props){
         super(props)
         this.state={
-            retireList: []
+            retireList: [],
+            purchaseList: []
         }
     }
     changeInput = event => {
@@ -22,6 +23,16 @@ class LibraryRequest extends React.Component{
                 })
             }
         )
+        fetch('http://127.0.0.1:5000/lms/api/purchaseBooks')
+            .then(result => result.json())
+            .then((result) => {
+                console.log(result)
+                this.setState({
+                  isLoaded: true,
+                  purchaseList: result.response
+                })
+            }
+        )
     }
     render(){
         return(
@@ -33,6 +44,7 @@ class LibraryRequest extends React.Component{
                     <ul className="feed-container">
                         <li className="feed-mail-item feed-mail-header">
                             <div className="feed-book-attr">Bibnum</div>
+                            <div className="feed-book-attr">Title</div>
                             <div className="feed-book-attr">Count</div>
                         </li>
                         {
@@ -40,6 +52,7 @@ class LibraryRequest extends React.Component{
                                 return(
                                     <li className="feed-mail-item">
                                         <div className="feed-book-attr">{item.bibnum}</div>
+                                        <div className="feed-book-attr">{item.title}</div>
                                         <div className="feed-book-attr">{item.itemcount}</div>
                                     </li>
                                 )
@@ -50,8 +63,26 @@ class LibraryRequest extends React.Component{
 
                 <h1>Books to be Purchased</h1>
                 <div className="form-container">
-                    
+                    <ul className="feed-container">
+                        <li className="feed-mail-item feed-mail-header">
+                            <div className="feed-book-attr">Bibnum</div>
+                            <div className="feed-book-attr">Title</div>
+                            <div className="feed-book-attr">Count</div>
+                        </li>
+                        {
+                            this.state.purchaseList.map((item) => {
+                                return(
+                                    <li className="feed-mail-item">
+                                        <div className="feed-book-attr">{item.bibnum}</div>
+                                        <div className="feed-book-attr">{item.title}</div>
+                                        <div className="feed-book-attr">{item.count}</div>
+                                    </li>
+                                )
+                            })
+                        }
+                    </ul>
                 </div>
+
             </div>
         )
     }
