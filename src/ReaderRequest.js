@@ -19,9 +19,10 @@ class ReaderRequest extends React.Component{
             .then(res => res.json())
             .then((res) => {
                 console.log(res)
+                console.log(res.book[0])
                 this.setState({
                   displayResponse: true,
-                  requestedBook: res.book,
+                  requestedBook: res.book[0],
                   suggestions: res.suggestions,
                 });
             }
@@ -29,22 +30,28 @@ class ReaderRequest extends React.Component{
     }
     renderBook(){
         if(this.state.displayResponse){
-            return(
-                <ul className="feed-container">
-                    <li className="feed-mail-item feed-mail-header">
-                        <div className="feed-book-attr">Title</div>
-                        <div className="feed-book-attr">Author</div>
-                        <div className="feed-book-attr">Publication</div>
-                        <div className="feed-book-attr">Available Qty</div>
-                    </li>
-                    <li className="feed-mail-item">
-                        <div className="feed-book-attr">{this.state.requestedBook.title}</div>
-                        <div className="feed-book-attr">{this.state.requestedBook.authorname}</div>
-                        <div className="feed-book-attr">{this.state.requestedBook.publicationname}</div>
-                        <div className="feed-book-attr">{this.state.requestedBook.count}</div>
-                    </li>
-                </ul>
-            )
+            if (this.state.requestedBook == undefined){
+                return (
+                    <h1>Sorry, There is no book by that title!</h1>
+                )
+            }else{
+                return(
+                    <ul className="feed-container">
+                        <li className="feed-mail-item feed-mail-header">
+                            <div className="feed-book-attr">Title</div>
+                            <div className="feed-book-attr">Author</div>
+                            <div className="feed-book-attr">Publication</div>
+                            <div className="feed-book-attr">Available Qty</div>
+                        </li>
+                        <li className="feed-mail-item">
+                            <div className="feed-book-attr">{this.state.requestedBook.title}</div>
+                            <div className="feed-book-attr">{this.state.requestedBook.authorname}</div>
+                            <div className="feed-book-attr">{this.state.requestedBook.publicationname}</div>
+                            <div className="feed-book-attr">{this.state.requestedBook.count}</div>
+                        </li>
+                    </ul>
+                )    
+            }
         }else{
             return null
         }

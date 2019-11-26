@@ -66,31 +66,36 @@ class AuthorRequest extends React.Component{
     }
     renderBook(){
         if(this.state.displayResponse){
-            return(
-                <ul className="feed-container">
-                    <li className="feed-mail-item feed-mail-header">
-                        <div className="feed-book-attr">Author</div>
-                        <div className="feed-book-attr">Bibnum</div>
-                        <div className="feed-book-attr">ItemCount</div>
-                        <div className="feed-book-attr">Item Type</div>
-                    </li>
-                    {
-                        this.state.requestedBook.map((item) => {
-                            var formatType="Print"
-                            if(!this.state.print.includes(item.itemtype))
-                            formatType="Other"
-                            return(                               
-                                <li className="feed-mail-item">
-                                    <div className="feed-book-attr">{item.AuthorName}</div>
-                                    <div className="feed-book-attr">{item.bibnum}</div>
-                                    <div className="feed-book-attr">{item.count}</div>
-                                    <div className="feed-book-attr">{formatType}</div>
-                                </li>
-                            )
-                        })
-                    }
-                </ul>
-            )
+            if(this.state.requestedBook.length >= 1){
+                return(
+                    <ul className="feed-container">
+                        <li className="feed-mail-item feed-mail-header">
+                            <div className="feed-book-attr">Author</div>
+                            <div className="feed-book-attr">ItemCount</div>
+                            <div className="feed-book-attr">Item Type</div>
+                        </li>
+                        {
+                            this.state.requestedBook.map((item) => {
+                                var formatType="Print"
+                                if(!this.state.print.includes(item.itemtype))
+                                formatType="Other"
+                                return(                               
+                                    <li className="feed-mail-item">
+                                        <div className="feed-book-attr">{item.AuthorName}</div>
+                                        <div className="feed-book-attr">{item.count}</div>
+                                        <div className="feed-book-attr">{formatType}</div>
+                                    </li>
+                                )
+                            })
+                        }
+                    </ul>
+                )
+            }
+            else{
+                return (
+                    <h1>Sorry, There are no books by this Author Name!</h1>
+                )
+            }
         }else{
             return null
         }

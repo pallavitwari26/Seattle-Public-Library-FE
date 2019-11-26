@@ -75,7 +75,7 @@ class LibraryRequest extends React.Component{
                                     <li className="feed-mail-item">
                                         <div className="feed-book-attr">{item.bibnum}</div>
                                         <div className="feed-book-attr">{item.title}</div>
-                                        <div className="feed-book-attr">{item.count}</div>
+                                        <div className="feed-book-attr">{item.Count}</div>
                                     </li>
                                 )
                             })
